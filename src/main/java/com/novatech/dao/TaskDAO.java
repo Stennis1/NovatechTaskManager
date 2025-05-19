@@ -8,12 +8,10 @@ import java.util.List;
 
 public class TaskDAO {
 
-    // Initiate DB Connection
     private final String URL = "jdbc:postgresql://localhost:5432/task_db";
     private final String USER = "stennis";
     private final String PASSWORD = "stennis12345";
 
-    // Load PostgreSQL driver
     public TaskDAO() {
         try {
             Class.forName("org.postgresql.Driver");
@@ -26,17 +24,16 @@ public class TaskDAO {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
-
     public void insertTask(Task task) {
         String sql = "INSERT INTO task (title, description, due_date, status) VALUES (?, ?, ?, ?)";
 
-        try(Connection connection = getConnection();
-            PreparedStatement stmt = connection.prepareStatement(sql)) {
+        try (Connection connection = getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setString(1, task.getTitle());
             stmt.setString(2, task.getDescription());
             stmt.setDate(3, Date.valueOf(task.getDueDate()));
-            stmt.setString(3, task.getStatus());
+            stmt.setString(4, task.getStatus());  // Fixed index
 
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -44,24 +41,23 @@ public class TaskDAO {
         }
     }
 
-
     public List<Task> getAllTasks() {
         List<Task> tasks = new ArrayList<>();
         String sql = "SELECT * FROM task ORDER BY due_date ASC";
 
-        try(Connection connection = getConnection();
-        PreparedStatement stmt = connection.prepareStatement(sql);
-        ResultSet rs = stmt.executeQuery()) {
+        try (Connection connection = getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
-        while (rs.next()) {
-            Task task = new Task();
-            task.setId(rs.getInt("id"));
-            task.setTitle(rs.getString("title"));
-            task.setDescription(rs.getString("description"));
-            task.setDueDate(rs.getDate("due_date").toLocalDate());
-            task.setStatus(rs.getString("status"));
+            while (rs.next()) {
+                Task task = new Task();
+                task.setId(rs.getInt("id"));
+                task.setTitle(rs.getString("title"));
+                task.setDescription(rs.getString("description"));
+                task.setDueDate(rs.getDate("due_date").toLocalDate());
+                task.setStatus(rs.getString("status"));
 
-            tasks.add(task);
+                tasks.add(task);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,22 +67,22 @@ public class TaskDAO {
 
     public Task getTaskById(int id) {
         Task task = null;
-        String sql = "SELECT FROM task WHERE id = ?";
+        String sql = "SELECT * FROM task WHERE id = ?"; // Fixed missing *
 
-        try(Connection connection = getConnection();
-        PreparedStatement stmt = connection.prepareStatement(sql)){
+        try (Connection connection = getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
 
-        stmt.setInt(1, id);
-        ResultSet rs = stmt.executeQuery();
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
 
-        if (rs.next()) {
-            task = new Task();
-            task.setId(rs.getInt("id"));
-            task.setTitle(rs.getString("title"));
-            task.setDescription(rs.getString("description"));
-            task.setDueDate(rs.getDate("due_date").toLocalDate());
-            task.setStatus(rs.getString("status"));
-        }
+            if (rs.next()) {
+                task = new Task();
+                task.setId(rs.getInt("id"));
+                task.setTitle(rs.getString("title"));
+                task.setDescription(rs.getString("description"));
+                task.setDueDate(rs.getDate("due_date").toLocalDate());
+                task.setStatus(rs.getString("status"));
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -96,7 +92,7 @@ public class TaskDAO {
     }
 
     public void updateTask(Task task) {
-        String sql = "UPDATE task SET title= ?, description = ?, due_date = ?, status = ? WHERE id = ?";
+        String sql = "UPDATE task SET title = ?, description = ?, due_date = ?, status = ? WHERE id = ?";
 
         try (Connection connection = getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -117,14 +113,13 @@ public class TaskDAO {
         String sql = "DELETE FROM task WHERE id = ?";
 
         try (Connection connection = getConnection();
-        PreparedStatement stmt = connection.prepareStatement(sql)) {
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
 
-        stmt.setInt(1, id);
-        stmt.executeUpdate();
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
 }
