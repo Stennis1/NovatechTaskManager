@@ -1,11 +1,11 @@
-package com.novatech.servlet;
+package com.novatech.task.servlet;
 
-import com.novatech.dao.TaskDAO;
-import com.novatech.model.Task;
+import com.novatech.task.dao.TaskDAO;
+import com.novatech.task.model.Task;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -16,6 +16,11 @@ public class AddTaskServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         taskDAO = new TaskDAO();
+    }
+
+    @Override
+    protected  void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/views/add-task.jsp").forward(request, response);
     }
 
     @Override

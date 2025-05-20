@@ -1,4 +1,4 @@
-package com.novatech.model;
+package com.novatech.task.model;
 
 import java.time.LocalDate;
 

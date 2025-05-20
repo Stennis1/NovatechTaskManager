@@ -1,10 +1,10 @@
-package com.novatech.servlet;
+package com.novatech.task.servlet;
 
-import com.novatech.dao.TaskDAO;
+import com.novatech.task.dao.TaskDAO;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 
 @WebServlet("/delete-task")
@@ -17,7 +17,7 @@ public class DeleteTaskServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         int id = Integer.parseInt(request.getParameter("id"));
@@ -26,3 +26,4 @@ public class DeleteTaskServlet extends HttpServlet {
         response.sendRedirect("tasks");
     }
 }
+

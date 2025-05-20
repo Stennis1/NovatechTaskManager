@@ -1,16 +1,13 @@
-package com.novatech.servlet;
+package com.novatech.task.servlet;
 
-import com.novatech.dao.TaskDAO;
-import com.novatech.model.Task;
+import com.novatech.task.dao.TaskDAO;
+import com.novatech.task.model.Task;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.time.LocalDate;
-
 
 @WebServlet("/edit-task")
 public class EditTaskServlet extends HttpServlet {
@@ -39,7 +36,7 @@ public class EditTaskServlet extends HttpServlet {
         String status = request.getParameter("status");
 
         Task task = new Task();
-        task.setId(task.getId());
+        task.setId(id);
         task.setTitle(title);
         task.setDescription(description);
         task.setDueDate(dueDate);
@@ -49,5 +46,4 @@ public class EditTaskServlet extends HttpServlet {
 
         response.sendRedirect("tasks");
     }
-
 }

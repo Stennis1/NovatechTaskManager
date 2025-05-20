@@ -10,41 +10,41 @@
 
   <display-name>NovaTech Task Management System</display-name>
 
-  <servlet>
-    <servlet-name>TaskListServlet</servlet-name>
-    <servlet-class>com.novatech.servlet.TaskListServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TaskListServlet</servlet-name>
-    <url-pattern>/tasks</url-pattern>
-  </servlet-mapping>
+<!--  <servlet>-->
+<!--    <servlet-name>TaskListServlet</servlet-name>-->
+<!--    <servlet-class>com.novatech.task.servlet.TaskListServlet</servlet-class>-->
+<!--  </servlet>-->
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>TaskListServlet</servlet-name>-->
+<!--    <url-pattern>/tasks</url-pattern>-->
+<!--  </servlet-mapping>-->
 
-  <servlet>
-    <servlet-name>AddTaskServlet</servlet-name>
-    <servlet-class>com.novatech.servlet.AddTaskServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddTaskServlet</servlet-name>
-    <url-pattern>/add-task</url-pattern>
-  </servlet-mapping>
+<!--  <servlet>-->
+<!--    <servlet-name>AddTaskServlet</servlet-name>-->
+<!--    <servlet-class>com.novatech.task.servlet.AddTaskServlet</servlet-class>-->
+<!--  </servlet>-->
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>AddTaskServlet</servlet-name>-->
+<!--    <url-pattern>/add-task</url-pattern>-->
+<!--  </servlet-mapping>-->
 
-  <servlet>
-    <servlet-name>EditTaskServlet</servlet-name>
-    <servlet-class>com.novatech.servlet.EditTaskServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>EditTaskServlet</servlet-name>
-    <url-pattern>/edit-task</url-pattern>
-  </servlet-mapping>
+<!--  <servlet>-->
+<!--    <servlet-name>EditTaskServlet</servlet-name>-->
+<!--    <servlet-class>com.novatech.task.servlet.EditTaskServlet</servlet-class>-->
+<!--  </servlet>-->
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>EditTaskServlet</servlet-name>-->
+<!--    <url-pattern>/edit-task</url-pattern>-->
+<!--  </servlet-mapping>-->
 
-  <servlet>
-    <servlet-name>DeleteTaskServlet</servlet-name>
-    <servlet-class>com.novatech.servlet.DeleteTaskServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DeleteTaskServlet</servlet-name>
-    <url-pattern>/delete-task</url-pattern>
-  </servlet-mapping>
+<!--  <servlet>-->
+<!--    <servlet-name>DeleteTaskServlet</servlet-name>-->
+<!--    <servlet-class>com.novatech.task.servlet.DeleteTaskServlet</servlet-class>-->
+<!--  </servlet>-->
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>DeleteTaskServlet</servlet-name>-->
+<!--    <url-pattern>/delete-task</url-pattern>-->
+<!--  </servlet-mapping>-->
 
   <!-- Welcome Page -->
   <welcome-file-list>

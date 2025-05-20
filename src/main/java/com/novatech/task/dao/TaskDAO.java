@@ -1,6 +1,6 @@
-package com.novatech.dao;
+package com.novatech.task.dao;
 
-import com.novatech.model.Task;
+import com.novatech.task.model.Task;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -122,4 +122,57 @@ public class TaskDAO {
             e.printStackTrace();
         }
     }
+
+    public List<Task> getFilteredTasks(String statusFilter, String sortOrder) {
+        List<Task> tasks = new ArrayList<>();
+
+        StringBuilder sql = new StringBuilder("SELECT * FROM task");
+
+        List<Object> parameters = new ArrayList<>();
+
+        // Build WHERE clause if filtering
+        if (statusFilter != null && !statusFilter.equalsIgnoreCase("All")) {
+            sql.append(" WHERE status = ?");
+            parameters.add(statusFilter);
+        }
+
+        // Append ORDER BY clause if sorting
+        if (sortOrder != null) {
+            if (sortOrder.equalsIgnoreCase("asc")) {
+                sql.append(" ORDER BY due_date ASC");
+            } else if (sortOrder.equalsIgnoreCase("desc")) {
+                sql.append(" ORDER BY due_date DESC");
+            }
+        } else {
+            sql.append(" ORDER BY due_date ASC"); // default sort
+        }
+
+        try (Connection connection = getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql.toString())) {
+
+            // Bind parameters
+            for (int i = 0; i < parameters.size(); i++) {
+                stmt.setObject(i + 1, parameters.get(i));
+            }
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Task task = new Task();
+                task.setId(rs.getInt("id"));
+                task.setTitle(rs.getString("title"));
+                task.setDescription(rs.getString("description"));
+                task.setDueDate(rs.getDate("due_date").toLocalDate());
+                task.setStatus(rs.getString("status"));
+
+                tasks.add(task);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return tasks;
+    }
+
 }
