@@ -2,9 +2,52 @@
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
-<web-app>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                             http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
   <display-name>NovaTech Task Management System</display-name>
 
+  <servlet>
+    <servlet-name>TaskListServlet</servlet-name>
+    <servlet-class>com.novatech.servlet.TaskListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TaskListServlet</servlet-name>
+    <url-pattern>/tasks</url-pattern>
+  </servlet-mapping>
 
+  <servlet>
+    <servlet-name>AddTaskServlet</servlet-name>
+    <servlet-class>com.novatech.servlet.AddTaskServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddTaskServlet</servlet-name>
+    <url-pattern>/add-task</url-pattern>
+  </servlet-mapping>
 
+  <servlet>
+    <servlet-name>EditTaskServlet</servlet-name>
+    <servlet-class>com.novatech.servlet.EditTaskServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditTaskServlet</servlet-name>
+    <url-pattern>/edit-task</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DeleteTaskServlet</servlet-name>
+    <servlet-class>com.novatech.servlet.DeleteTaskServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteTaskServlet</servlet-name>
+    <url-pattern>/delete-task</url-pattern>
+  </servlet-mapping>
+
+  <!-- Welcome Page -->
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
 </web-app>
